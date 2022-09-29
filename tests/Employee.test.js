@@ -4,6 +4,7 @@ describe("Employee class", () => {
 
     const employee = new Employee("Sam", 21, "samuel@gmail.com");
 
+    const falseEmployee = new Employee(349, "Hello", 0253)
 
     describe("getName method", () => {
         it("returns employee's name on the console", () => expect(employee.getName()).toEqual("Sam"));
