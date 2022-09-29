@@ -1,39 +1,20 @@
 const Employee = require('../lib/Employee');
 
 describe("Employee class", () => {
-    describe("getName method", () => {
-        it("returns employee's name on the console", () => {
-            const employee = new Employee("Sam", 21, "samuel@gmail.com");
 
-            expect(employee.getName()).toEqual("Sam");
-        });
+    const employee = new Employee("Sam", 21, "samuel@gmail.com");
+
+
+    describe("getName method", () => {
+        it("returns employee's name on the console", () => expect(employee.getName()).toEqual("Sam"));
+    });
+    describe("getId method", () => {
+        it("returns employee's ID on the console", () => expect(employee.getId()).toEqual(21));
+    });
+    describe("getEmail method", () => {
+        it("returns employee's email", () => expect(employee.getEmail()).toEqual("samuel@gmail.com"));
+    });
+    describe("getRole method", () => {
+        it("returns employee's role", () => expect(employee.getRole()).toEqual("Employee"));
     });
 });
-
-// class Employee {
-//     constructor(name, id, email){
-//         this.name = name;
-//         this.id = id ;
-//         this.email = email;
-//     };
-
-//     getName(){
-//         console.log("name: ", this.name);
-//     };
-
-//     getId(){
-//         console.log("ID: ", this.id);
-//     };
-
-//     getEmail(){
-//         console.log("Email: ", this.email);
-//     };
-
-//     getRole(){
-//         console.log("Role: ", this);
-//     };
-// };
-
-// const test = new Employee("Sam", "21", "samuel@gmail.com")
-
-// console.log(test)
