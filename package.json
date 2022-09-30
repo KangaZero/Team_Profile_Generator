@@ -9,7 +9,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/free-regular-svg-icons": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "chalk": "^2.4.1",
+    "inquirer": "^8.2.4",
     "jest-mock-fetch": "^2.0.5"
   },
   "devDependencies": {
