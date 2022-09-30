@@ -22,7 +22,7 @@ const userGraduateIcon = icon(userGraduate);
 const userGearIcon = icon(userGear);
 
 //test //TODO create test for icons
-console.log(starIcon)
+//console.log(starIcon)
 
 //classes
 const Employee = require('./lib/Employee');
@@ -43,24 +43,141 @@ inquirer
             message: "What is the name of your manager?",
         },
        
-    ]).then((answers) => {
+    ]).then((answers1) => {
+       // console.log(answers1)
         inquirer
             .prompt([
                 {
                     type: 'input',
                     name: "managerId",
-                    message: `What is the ID for ${answers.managerName}?`
+                    message: `What is the ID for ${answers1.managerName}?`,
                 },
                 {
                     type: 'input',
                     name: 'managerEmail',
-                    message: `What is the email for ${answers.managerName}?`
+                    message: `What is the email for ${answers1.managerName}?`,
                 },
                 {
                     type: 'input',
                     name: 'managerOfficeNumber',
-                    message: `What is the office number for ${answers.managerName}?`
+                    message: `What is the office number for ${answers1.managerName}?`,
+                },
+                {
+                    type: 'confirm',
+                    name: 'addEmployee',
+                    message: `Would you like to add an employee?`,
+                },
+            ]).then((answers2) => {
+               // console.log(answers2)
+                 if(answers2.addEmployee){
+                    inquirer
+                        .prompt([
+                            {
+                                type: 'list',
+                                name: 'role',
+                                message: 'Choose the role for your new employee',
+                                choices: ['Engineer', 'Intern', 'Employee'],
+                            }, 
+                ]).then((answers3) => {
+                    let role = answers3.role.toLowerCase()
+                   // console.log(role)
+                   const rolePrompt = () => { 
+                    switch(role){
+                        case 'employee':
+                            inquirer
+                                .prompt([
+                                    {
+                                        type: 'input',
+                                        name: 'employeeName',
+                                        message: 'Enter employee name',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'employeeId',
+                                        message: 'Enter employee ID',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'employeeEmail',
+                                        message: 'Enter employee email',
+                                    },
+                            ]);
+
+                        break;
+                        case 'engineer':
+                            inquirer
+                                .prompt([
+                                    {
+                                        type: 'input',
+                                        name: 'engineerName',
+                                        message: 'Enter engineer name',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'engineerId',
+                                        message: 'Enter engineer ID',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'engineerEmail',
+                                        message: 'Enter engineer email',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'engineerGithub',
+                                        message: "Enter engineer's github username",
+                                    },
+                                 
+                            ]);
+                        
+                        break;
+                        case 'intern':
+                            inquirer
+                                .prompt([
+                                    {
+                                        type: 'input',
+                                        name: 'internName',
+                                        message: 'Enter intern name',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'internId',
+                                        message: 'Enter intern ID',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'internEmail',
+                                        message: 'Enter intern email',
+                                    },
+                                    {
+                                        type: 'input',
+                                        name: 'internSchool',
+                                        message: `Enter intern's school name`,
+                                    },
+                            ]);
+                        
+                        break;
+                        default: 
+                            console.error("Oops something went wrong, please try again")
+                    }};
+                    //call rolePrompt function for prompt to appear
+                    rolePrompt();
+                        
+
+                }) 
+            } else{
+                    //const teamPageContent = generateTeamPage(answers)
+
                 }
-            ])
+               
+                
             
+        })
+       
     });
+
+    // const readMeContent = generateReadMe(answers);
+
+    //     fs.writeFile('README.md', readMeContent, (err) =>
+    //     err ? console.error(err) : console.log("README created!")
+    //     )
