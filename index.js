@@ -30,6 +30,24 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
+//merge
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+
+// const test = { employeeName: 'mm', employeeId: '7', employeeEmail: 'lol' }
+// const test2 =   {
+//     managerId: 'l',
+//     managerEmail: 'l',
+//     managerOfficeNumber: 'l',
+//     addEmployee: true
+//   }
+       //TODO merge method HERE!
+// const test3 = {...test, ...test2}
+//or
+//const merge = (...objects) => objects.reduce((acc, cur) => ({ ...acc, ...cur }));
+//const merged = merge(test, test2)
+
+
+
 inquirer
     .prompt([
         {
@@ -101,9 +119,13 @@ inquirer
                                         name: 'employeeEmail',
                                         message: 'Enter employee email',
                                     },
-                            ]);
+                            ]).then((employeeAnswers) => {
+                                //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
+                            const {employeeName, employeeId, employeeEmail} = employeeAnswers;
+                            });
 
                         break;
+
                         case 'engineer':
                             inquirer
                                 .prompt([
@@ -128,9 +150,13 @@ inquirer
                                         message: "Enter engineer's github username",
                                     },
                                  
-                            ]);
+                            ]).then((engineerAnswers) => {
+                                //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
+                            const {engineerName, engineerId, engineerEmail, engineerGithub} = engineerAnswers;
+                            });
                         
                         break;
+
                         case 'intern':
                             inquirer
                                 .prompt([
@@ -154,9 +180,13 @@ inquirer
                                         name: 'internSchool',
                                         message: `Enter intern's school name`,
                                     },
-                            ]);
+                            ]).then((internAnswers) => {
+                                //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
+                            const {internName, internId, internEmail, internSchool} = internAnswers;
+                            });
                         
                         break;
+
                         default: 
                             console.error("Oops something went wrong, please try again")
                     }};
@@ -166,18 +196,16 @@ inquirer
 
                 }) 
             } else{
+                //TODO create fs.writeFile
                     //const teamPageContent = generateTeamPage(answers)
-
-                }
-               
-                
-            
-        })
-       
+                    fs.writeFile('index.html', teamPageContent,'utf8', (err) => {
+                        err ? console.error(err) : console.log("Team Page created!")
+                    });
+                };
+        });     
     });
 
-    // const readMeContent = generateReadMe(answers);
 
-    //     fs.writeFile('README.md', readMeContent, (err) =>
-    //     err ? console.error(err) : console.log("README created!")
-    //     )
+
+const generateTeamPage = () => 
+`hi`
