@@ -5,3 +5,9 @@
 .custom-card-dark{
     background-color: rgb(31, 31, 37);
 }
+
+a{
+  text-decoration: none;  
+  color: rgb(70, 70, 143)
+
+}

@@ -153,7 +153,31 @@ inquirer
                             ]).then((engineerAnswers) => {
                                 //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
                             const {engineerName, engineerId, engineerEmail, engineerGithub} = engineerAnswers;
+                                const answers = {...answers1, ...answers2, ...answers3, ...engineerAnswers};
+
+                                const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
+        
+                            const generateEngineerCard = (engineer) => 
+                                `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body">
+                                  <h4 class="card-title">${engineer.name}<i>${starIcon}</i></h4>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                  <li class="list-group-item bg-secondary">ID: ${engineer.id}</li>
+                                  <li class="list-group-item bg-secondary">Email: <a href="${engineer.email}">${engineer.email}</a></li>
+                                  <li class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></li> 
+                                </ul>
+                            </div>`
+                            
+                                fs.appendFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
+                                    err ? console.error(err) : console.log("Team Page created!")
+                                });
+                            // fs.writeFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
+                            //     err ? console.error(err) : console.log("Team Page created!")
+                            // });
                             });
+
                         
                         break;
 
