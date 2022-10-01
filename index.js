@@ -62,7 +62,28 @@ inquirer
         },
        
     ]).then((answers1) => {
-       // console.log(answers1)
+       const generateTopSection = (answers1) =>
+        `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${answers1.teamName}</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+            <link href="./style.css" type="text/css" rel="stylesheet"/>
+        </head>
+        <body class="custom-background">
+            <div class="container-fluid text-center text-light bg-dark p-4">
+                <h1 class="mx-auto">${answers1.teamName}</h1>
+            </div>
+                <hr class="border border-white">
+            <div id="main" class="d-flex flex-row flex-wrap justify-content-around col-12">`
+
+            fs.writeFile('index.html', generateTopSection(answers1),'utf8', (err) => {
+                err ? console.error(err) : console.log("Page created!")
+            });
+
         inquirer
             .prompt([
                 {
@@ -79,157 +100,211 @@ inquirer
                     type: 'input',
                     name: 'managerOfficeNumber',
                     message: `What is the office number for ${answers1.managerName}?`,
-                },
-                {
-                    type: 'confirm',
-                    name: 'addEmployee',
-                    message: `Would you like to add an employee?`,
-                },
+                },   
             ]).then((answers2) => {
-               // console.log(answers2)
-                 if(answers2.addEmployee){
+                     const managerAnswers = {...answers1, ...answers2}
+                     const manager = new Manager(managerAnswers.managerName, managerAnswers.managerId, managerAnswers.managerEmail, managerAnswers. managerOfficeNumber)
+                        
+                        const generateManagerCard = (manager) =>
+                        `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                        <h4 class="card-title">${manager.name}<i>${starIcon}</i></h4>
+                        </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item bg-secondary">ID: ${manager.id}</li>
+                                <li class="list-group-item bg-secondary">Email: <a href="${manager.email}">${manager.email}</a></li>
+                                <li class="list-group-item bg-secondary">Office number: ${manager.officeNumber}</li> 
+                            </ul>
+                        </div>`
+                
+                fs.appendFile('index.html', generateManagerCard(managerAnswers),'utf8', (err) => {
+                    err ? console.error(err) : console.log("Manager card appended!")
+                });
+                // const confirmPrompt = () => {
                     inquirer
-                        .prompt([
-                            {
-                                type: 'list',
-                                name: 'role',
-                                message: 'Choose the role for your new employee',
-                                choices: ['Engineer', 'Intern', 'Employee'],
-                            }, 
-                ]).then((answers3) => {
-                    let role = answers3.role.toLowerCase()
-                   // console.log(role)
-                   const rolePrompt = () => { 
-                    switch(role){
-                        case 'employee':
+                    .prompt([
+                        {
+                            type: 'confirm',
+                            name: 'addEmployee',
+                            message: `Would you like to add an employee?`,
+                        },
+                    ]).then((confirm) => {
+                        const confirmPrompt = () => {
+                        if(confirm.addEmployee || repick.repick){
                             inquirer
                                 .prompt([
                                     {
-                                        type: 'input',
-                                        name: 'employeeName',
-                                        message: 'Enter employee name',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'employeeId',
-                                        message: 'Enter employee ID',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'employeeEmail',
-                                        message: 'Enter employee email',
-                                    },
-                            ]).then((employeeAnswers) => {
-                                //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
-                            const {employeeName, employeeId, employeeEmail} = employeeAnswers;
-                            });
-
-                        break;
-
-                        case 'engineer':
-                            inquirer
-                                .prompt([
-                                    {
-                                        type: 'input',
-                                        name: 'engineerName',
-                                        message: 'Enter engineer name',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'engineerId',
-                                        message: 'Enter engineer ID',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'engineerEmail',
-                                        message: 'Enter engineer email',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'engineerGithub',
-                                        message: "Enter engineer's github username",
-                                    },
-                                 
-                            ]).then((engineerAnswers) => {
-                                //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
-                            const {engineerName, engineerId, engineerEmail, engineerGithub} = engineerAnswers;
-                                const answers = {...answers1, ...answers2, ...answers3, ...engineerAnswers};
-
-                                const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
+                                        type: 'list',
+                                        name: 'role',
+                                        message: 'Choose the role for your new employee',
+                                        choices: ['Engineer', 'Intern', 'Employee'],
+                                    }, 
+                        ]).then((answers3) => {
+                            let role = answers3.role.toLowerCase()
+                            const rolePrompt = () => { 
+                                switch(role){
+                                    case 'employee':
+                                        inquirer
+                                            .prompt([
+                                                {
+                                                    type: 'input',
+                                                    name: 'employeeName',
+                                                    message: 'Enter employee name',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'employeeId',
+                                                    message: 'Enter employee ID',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'employeeEmail',
+                                                    message: 'Enter employee email',
+                                                },
+                                        ]).then((employeeAnswers) => {
+                                            //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
+                                        const {employeeName, employeeId, employeeEmail} = employeeAnswers;
+                                        });
+            
+                                    break;
+            
+                                    case 'engineer':
+                                        inquirer
+                                            .prompt([
+                                                {
+                                                    type: 'input',
+                                                    name: 'engineerName',
+                                                    message: 'Enter engineer name',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'engineerId',
+                                                    message: 'Enter engineer ID',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'engineerEmail',
+                                                    message: 'Enter engineer email',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'engineerGithub',
+                                                    message: "Enter engineer's github username",
+                                                },
+                                             
+                                        ]).then((engineerAnswers) => {
+                                            //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
+                                            const {engineerName, engineerId, engineerEmail, engineerGithub} = engineerAnswers;
+                                            const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
+                    
+                                                const generateEngineerCard = (engineer) => 
+                                                `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
+                                                <img class="card-img-top" src="..." alt="Card image cap">
+                                                <div class="card-body">
+                                                <h4 class="card-title">${engineer.name}<i>${starIcon}</i></h4>
+                                                </div>
+                                                    <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item bg-secondary">ID: ${engineer.id}</li>
+                                                    <li class="list-group-item bg-secondary">Email: <a href="${engineer.email}">${engineer.email}</a></li>
+                                                    <li class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></li> 
+                                                    </ul>
+                                                </div>`
+                                        
+                                            fs.appendFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
+                                                err ? console.error(err) : console.log("Engineer card appended!")
+                                            });
+                                            repickPrompt();
+                                      
+                                        });
+            
+                                    
+                                    break;
+            
+                                    case 'intern':
+                                        inquirer
+                                            .prompt([
+                                                {
+                                                    type: 'input',
+                                                    name: 'internName',
+                                                    message: 'Enter intern name',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'internId',
+                                                    message: 'Enter intern ID',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'internEmail',
+                                                    message: 'Enter intern email',
+                                                },
+                                                {
+                                                    type: 'input',
+                                                    name: 'internSchool',
+                                                    message: `Enter intern's school name`,
+                                                },
+                                        ]).then((internAnswers) => {
+                                            //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
+                                        const {internName, internId, internEmail, internSchool} = internAnswers;
+                                        });
+                                    
+                                    break;
+            
+                                    default: 
+                                        console.error("Oops something went wrong, please try again")
+                                    
+                                }};
+                            rolePrompt();
+                    })
+                }   else{
+                    end();
+                };
+                    
+            
+             };
+             const repickPrompt = () => {
+                inquirer
+                    .prompt([
+                        {
+                            type:'confirm',
+                            name:'repick',
+                            message: "Would you to add another employee?"
+                        }
+                    ]).then((repick => repick.repick ? confirmPrompt() : end())) 
+                };
+             confirmPrompt();
+             }); //132
+       // }; //124
         
-                            const generateEngineerCard = (engineer) => 
-                                `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                  <h4 class="card-title">${engineer.name}<i>${starIcon}</i></h4>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                  <li class="list-group-item bg-secondary">ID: ${engineer.id}</li>
-                                  <li class="list-group-item bg-secondary">Email: <a href="${engineer.email}">${engineer.email}</a></li>
-                                  <li class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></li> 
-                                </ul>
-                            </div>`
-                            
-                                fs.appendFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
-                                    err ? console.error(err) : console.log("Team Page created!")
-                                });
-                            // fs.writeFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
-                            //     err ? console.error(err) : console.log("Team Page created!")
-                            // });
-                            });
+                // const repickPrompt = () => {
+                //     inquirer
+                //         .prompt([
+                //             {
+                //                 type:'confirm',
+                //                 name:'repick',
+                //                 message: "Would you to add another employee?"
+                //             }
+                //         ]).then((repick => repick.repick ? confirmPrompt() : end())) 
+                //     };
+                
+                }); //104
+            });   //64  
+    
 
-                        
-                        break;
 
-                        case 'intern':
-                            inquirer
-                                .prompt([
-                                    {
-                                        type: 'input',
-                                        name: 'internName',
-                                        message: 'Enter intern name',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'internId',
-                                        message: 'Enter intern ID',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'internEmail',
-                                        message: 'Enter intern email',
-                                    },
-                                    {
-                                        type: 'input',
-                                        name: 'internSchool',
-                                        message: `Enter intern's school name`,
-                                    },
-                            ]).then((internAnswers) => {
-                                //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
-                            const {internName, internId, internEmail, internSchool} = internAnswers;
-                            });
-                        
-                        break;
+    const end = () => {
+        const generateBottomSection = () =>
+        `</div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> 
+        <script src="../index.js"></script>
+    </body>
+    </html>`
 
-                        default: 
-                            console.error("Oops something went wrong, please try again")
-                    }};
-                    //call rolePrompt function for prompt to appear
-                    rolePrompt();
-                        
-
-                }) 
-            } else{
-                //TODO create fs.writeFile
-                    //const teamPageContent = generateTeamPage(answers)
-                    fs.writeFile('index.html', teamPageContent,'utf8', (err) => {
-                        err ? console.error(err) : console.log("Team Page created!")
+        fs.appendFile('index.html', generateBottomSection(),'utf8', (err) => {
+                        err ? console.error(err) : console.log("Team Page completed!")
                     });
                 };
-        });     
-    });
-
-
 
 const generateTeamPage = () => 
 `hi`
