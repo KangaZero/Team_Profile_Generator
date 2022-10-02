@@ -226,7 +226,7 @@ inquirer
                                                     <ul class="list-group list-group-flush">
                                                     <li class="list-group-item bg-secondary">ID: ${engineer.id}</li>
                                                     <li class="list-group-item bg-secondary">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
-                                                    <li class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></li> 
+                                                    <li class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li> 
                                                     </ul>
                                                 </div>`
                                         
