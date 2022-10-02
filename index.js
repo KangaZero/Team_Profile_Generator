@@ -1,28 +1,32 @@
 //NPMs
 const fs = require('fs');
 const inquirer = require('inquirer');
-const { library } = require('@fortawesome/fontawesome-svg-core');
-const { fas } = require('@fortawesome/free-solid-svg-icons');
-const { far } = require('@fortawesome/free-regular-svg-icons');
-const { fab } = require('@fortawesome/free-brands-svg-icons');
 
-library.add(fas, far, fab);
+// const { library } = require('@fortawesome/fontawesome-svg-core');
+// const { fas } = require('@fortawesome/free-solid-svg-icons');
+// const { far } = require('@fortawesome/free-regular-svg-icons');
+// const { fab } = require('@fortawesome/free-brands-svg-icons');
 
-//icons
-//https://fontawesome.com/docs/apis/javascript/icon-library#using-the-library
-const { findIconDefinition, icon } = require('@fortawesome/fontawesome-svg-core');
-const star = findIconDefinition({ prefix: 'fas', iconName: 'star' });
-const userTie = findIconDefinition({ prefix: 'fas', iconName: 'user-tie' });
-const userGraduate = findIconDefinition({ prefix: 'fas', iconName: 'user-graduate' });
-const userGear = findIconDefinition({ prefix: 'fas', iconName: 'user-gear' });
 
-const starIcon = icon(star);
-const userTieIcon = icon(userTie);
-const userGraduateIcon = icon(userGraduate);
-const userGearIcon = icon(userGear);
+// library.add(fas, far, fab);
+
+// //icons
+// //https://fontawesome.com/docs/apis/javascript/icon-library#using-the-library
+// const { findIconDefinition, icon } = require('@fortawesome/fontawesome-svg-core');
+// const star = findIconDefinition({ prefix: 'fas', iconName: 'star' });
+// const userTie = findIconDefinition({ prefix: 'fas', iconName: 'user-tie' });
+// const userGraduate = findIconDefinition({ prefix: 'fas', iconName: 'user-graduate' });
+// const userGear = findIconDefinition({ prefix: 'fas', iconName: 'user-gear' });
+
+// const starIcon = icon(star);
+// const userTieIcon = icon(userTie);
+// const userGraduateIcon = icon(userGraduate);
+// const userGearIcon = icon(userGear);
+
+
 
 //test //TODO create test for icons
-//console.log(starIcon)
+
 
 //classes
 const Employee = require('./lib/Employee');
@@ -71,6 +75,7 @@ inquirer
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>${answers1.teamName}</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link href="./style.css" type="text/css" rel="stylesheet"/>
         </head>
         <body class="custom-background">
@@ -107,9 +112,8 @@ inquirer
                         
                         const generateManagerCard = (manager) =>
                         `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
-                        <img class="card-img-top" src="..." alt="Card image cap">
                         <div class="card-body">
-                        <h4 class="card-title">${manager.name}<i>${starIcon}</i></h4>
+                        <h4 class="card-title">${manager.name} <i class="fa-solid fa-star"></i></h4>
                         </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item bg-secondary">ID: ${manager.id}</li>
@@ -118,7 +122,7 @@ inquirer
                             </ul>
                         </div>`
                 
-                fs.appendFile('index.html', generateManagerCard(managerAnswers),'utf8', (err) => {
+                fs.appendFile('index.html', generateManagerCard(manager),'utf8', (err) => {
                     err ? console.error(err) : console.log("Manager card appended!")
                 });
                 // const confirmPrompt = () => {
@@ -163,8 +167,24 @@ inquirer
                                                     message: 'Enter employee email',
                                                 },
                                         ]).then((employeeAnswers) => {
-                                            //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
                                         const {employeeName, employeeId, employeeEmail} = employeeAnswers;
+                                        const employee = new Employee(employeeName, employeeId, employeeEmail);
+
+                                            const generateEmployeeCard = (employee) =>
+                                                `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
+                                                <div class="card-body">
+                                                <h4 class="card-title">${employee.name} <i class="fa-solid fa-user-tie"></i></h4>
+                                                </div>
+                                                    <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item bg-secondary">ID: ${employee.id}</li>
+                                                    <li class="list-group-item bg-secondary">Email: <a href="${employee.email}">${employee.email}</a></li>
+                                                    </ul>
+                                                </div>`
+
+                                                fs.appendFile('index.html', generateEmployeeCard(employee),'utf8', (err) => {
+                                                    err ? console.error(err) : console.log("Employee card appended!")
+                                                });
+                                                repickPrompt();
                                         });
             
                                     break;
@@ -200,9 +220,8 @@ inquirer
                     
                                                 const generateEngineerCard = (engineer) => 
                                                 `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
-                                                <img class="card-img-top" src="..." alt="Card image cap">
                                                 <div class="card-body">
-                                                <h4 class="card-title">${engineer.name}<i>${starIcon}</i></h4>
+                                                <h4 class="card-title">${engineer.name} <i class="fa-solid fa-user-gear"></h4>
                                                 </div>
                                                     <ul class="list-group list-group-flush">
                                                     <li class="list-group-item bg-secondary">ID: ${engineer.id}</li>
@@ -245,8 +264,26 @@ inquirer
                                                     message: `Enter intern's school name`,
                                                 },
                                         ]).then((internAnswers) => {
-                                            //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
                                         const {internName, internId, internEmail, internSchool} = internAnswers;
+                                        const intern = new Intern(internName, internId, internEmail, internSchool);
+
+                                            const generateInternCard = (intern) =>
+                                            `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
+                                            <div class="card-body">
+                                            <h4 class="card-title">${intern.name} <i class="fa-solid fa-user-graduate"></i></h4>
+                                            </div>
+                                                <ul class="list-group list-group-flush">
+                                                <li class="list-group-item bg-secondary">ID: ${intern.id}</li>
+                                                <li class="list-group-item bg-secondary">Email: <a href="${intern.email}">${intern.email}</a></li>
+                                                <li class="list-group-item bg-secondary">School: ${intern.school}</li> 
+                                                </ul>
+                                            </div>`
+
+                                            fs.appendFile('index.html', generateInternCard(intern),'utf8', (err) => {
+                                                err ? console.error(err) : console.log("Intern card appended!")
+                                            });
+                                            repickPrompt();
+
                                         });
                                     
                                     break;
@@ -306,5 +343,3 @@ inquirer
                     });
                 };
 
-const generateTeamPage = () => 
-`hi`
