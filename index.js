@@ -73,14 +73,15 @@ inquirer
             <title>${answers1.teamName}</title>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-            <link href="./style.css" type="text/css" rel="stylesheet"/>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+            <link href="./dist/style.css" type="text/css" rel="stylesheet"/>
         </head>
         <body class="custom-background">
             <div class="container-fluid text-center text-light bg-dark p-4">
                 <h1 class="mx-auto">${answers1.teamName}</h1>
             </div>
                 <hr class="border border-white">
-            <div id="main" class="d-flex flex-row flex-wrap justify-content-around col-12">\n`
+            <div id="main" class="d-flex flex-row flex-wrap justify-content-around col-12">`
 
             fs.writeFile('index.html', generateTopSection(answers1),'utf8', (err) => {
                 err ? console.error(err) : console.log("Page created!")
@@ -110,20 +111,28 @@ inquirer
                         const generateManagerCard = (manager) =>
                         `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                         <div class="card-body">
-                        <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
-                        <h4 class="card-title">${manager.name} <i class="fa-solid fa-star"></i></h4>
+                        <button id="manager-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                        <h4 id="manager-name" class="card-title">${manager.name} <i class="fa-solid fa-star"></i></h4>
                         </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-secondary">ID: ${manager.id}</li>
-                                <li class="list-group-item bg-secondary">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
-                                <li class="list-group-item bg-secondary">Office number: ${manager.officeNumber}</li> 
+                                <li id="manager-id" class="list-group-item bg-secondary">ID: ${manager.id}</li>
+                                <li id="manager-email" class="list-group-item bg-secondary">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
+                                <li id="manager-office-number" class="list-group-item bg-secondary">Office number: ${manager.officeNumber}</li> 
                             </ul>
-                        </div>\n`
+                        </div>`
                 
                 fs.appendFile('index.html', generateManagerCard(manager),'utf8', (err) => {
                     err ? console.error(err) : console.log("Manager card appended!")
                 });
-                // const confirmPrompt = () => {
+
+                // const copyManagerText = () =>{
+                //     const managerBtnEl = document.querySelector('#manager-btn');
+                //     managerBtnEl.addEventListener("click", () =>{
+                //         const managerText = `Name: ${manager.name}\nRole: ${manager.getRole()}\nId: ${manager.id}\nEmail: ${manager.email}\n Office number: ${manager.officeNumber}`
+                //         managerText.select();
+                //     });
+                // };  copyManagerText();
+
                     inquirer
                     .prompt([
                         {
@@ -171,18 +180,27 @@ inquirer
                                             const generateEmployeeCard = (employee) =>
                                                 `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                                 <div class="card-body">
-                                                <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
-                                                <h4 class="card-title">${employee.name} <i class="fa-solid fa-user-tie"></i></h4>
+                                                <button id="employee-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                                                <h4 id="employee-name" class="card-title">${employee.name} <i class="fa-solid fa-user-tie"></i></h4>
                                                 </div>
                                                     <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item bg-secondary">ID: ${employee.id}</li>
-                                                    <li class="list-group-item bg-secondary">Email: <a href="mailto:${employee.email}">${employee.email}</a></li>
+                                                    <li id="employee-id" class="list-group-item bg-secondary">ID: ${employee.id}</li>
+                                                    <li id="employee-email" class="list-group-item bg-secondary">Email: <a href="mailto:${employee.email}">${employee.email}</a></li>
                                                     </ul>
-                                                </div>\n`
+                                                </div>`
 
                                                 fs.appendFile('index.html', generateEmployeeCard(employee),'utf8', (err) => {
                                                     err ? console.error(err) : console.log("Employee card appended!")
                                                 });
+
+                                                // const copyEmployeeText = () =>{
+                                                //     const employeeBtnEl = document.querySelector('#employee-btn');
+                                                //     employeeBtnEl.addEventListener("click", () =>{
+                                                //         const employeeText = `Name: ${employee.name}\nRole: ${employee.getRole()}\nId: ${employee.id}\nEmail: ${employee.email}`
+                                                //         employeeText.select();
+                                                //     });
+                                                // };  copyEmployeeText();
+
                                                 repickPrompt();
                                         });
             
@@ -220,19 +238,28 @@ inquirer
                                                 const generateEngineerCard = (engineer) => 
                                                 `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                                 <div class="card-body">
-                                                <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
-                                                <h4 class="card-title">${engineer.name} <i class="fa-solid fa-user-gear"></h4>
+                                                <button id="engineer-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                                                <h4 id="engineer-name" class="card-title">${engineer.name} <i class="fa-solid fa-user-gear"></i></h4>
                                                 </div>
                                                     <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item bg-secondary">ID: ${engineer.id}</li>
-                                                    <li class="list-group-item bg-secondary">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
-                                                    <li class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li> 
+                                                    <li id="engineer-id" class="list-group-item bg-secondary">ID: ${engineer.id}</li>
+                                                    <li id="engineer-email" class="list-group-item bg-secondary">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
+                                                    <li id="engineer-github" class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li> 
                                                     </ul>
-                                                </div>\n`
+                                                </div>`
                                         
                                             fs.appendFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
                                                 err ? console.error(err) : console.log("Engineer card appended!")
                                             });
+
+                                            // const copyEngineerText = () =>{
+                                            //     const engineerBtnEl = document.querySelector('#enigneer-btn');
+                                            //     engineerBtnEl.addEventListener("click", () =>{
+                                            //         const engineerText = `Name: ${engineer.name}\nRole: ${engineer.getRole()}\nId: ${engineer.id}\nEmail: ${engineer.email}\nGithub: ${engineer.github}`
+                                            //         engineerText.select();
+                                            //     });
+                                            // };  copyEngineerText();
+
                                             repickPrompt();
                                       
                                         });
@@ -270,19 +297,28 @@ inquirer
                                             const generateInternCard = (intern) =>
                                             `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                             <div class="card-body">
-                                            <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
-                                            <h4 class="card-title">${intern.name} <i class="fa-solid fa-user-graduate"></i></h4>
+                                            <button id="intern-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                                            <h4 id="intern-name" class="card-title">${intern.name} <i class="fa-solid fa-user-graduate"></i></h4>
                                             </div>
                                                 <ul class="list-group list-group-flush">
-                                                <li class="list-group-item bg-secondary">ID: ${intern.id}</li>
-                                                <li class="list-group-item bg-secondary">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
-                                                <li class="list-group-item bg-secondary">School: ${intern.school}</li> 
+                                                <li id="intern-id" class="list-group-item bg-secondary">ID: ${intern.id}</li>
+                                                <li id="intern-email" class="list-group-item bg-secondary">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
+                                                <li id="intern-school" class="list-group-item bg-secondary">School: ${intern.school}</li> 
                                                 </ul>
-                                            </div>\n`
+                                            </div>`
 
                                             fs.appendFile('index.html', generateInternCard(intern),'utf8', (err) => {
                                                 err ? console.error(err) : console.log("Intern card appended!")
                                             });
+
+                                            // const copyInternText = () =>{
+                                            //     const internBtnEl = document.querySelector('#intern-btn');
+                                            //     internBtnEl.addEventListener("click", () =>{
+                                            //         const internText = `Name: ${intern.name}\nRole: ${intern.getRole()}\nId: ${intern.id}\nEmail: ${intern.email}\nSchool: ${intern.school}`
+                                            //         internText.select();
+                                            //     });
+                                            // };  copyInternText();
+
                                             repickPrompt();
 
                                         });
@@ -335,7 +371,15 @@ inquirer
         const generateBottomSection = () =>
         `</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> 
-        <script src="../index.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+        <script src="./index.js"></script>
+        <script src="./copy.js"></script>
+        <script>
+            $(function() {
+    $( ".card" ).draggable();
+  } );
+        </script>
     </body>
     </html>`
 
