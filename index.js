@@ -25,9 +25,6 @@ const inquirer = require('inquirer');
 
 
 
-//test //TODO create test for icons
-
-
 //classes
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
@@ -83,7 +80,7 @@ inquirer
                 <h1 class="mx-auto">${answers1.teamName}</h1>
             </div>
                 <hr class="border border-white">
-            <div id="main" class="d-flex flex-row flex-wrap justify-content-around col-12">`
+            <div id="main" class="d-flex flex-row flex-wrap justify-content-around col-12">\n`
 
             fs.writeFile('index.html', generateTopSection(answers1),'utf8', (err) => {
                 err ? console.error(err) : console.log("Page created!")
@@ -113,6 +110,7 @@ inquirer
                         const generateManagerCard = (manager) =>
                         `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                         <div class="card-body">
+                        <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
                         <h4 class="card-title">${manager.name} <i class="fa-solid fa-star"></i></h4>
                         </div>
                             <ul class="list-group list-group-flush">
@@ -120,7 +118,7 @@ inquirer
                                 <li class="list-group-item bg-secondary">Email: <a href="mailto:${manager.email}">${manager.email}</a></li>
                                 <li class="list-group-item bg-secondary">Office number: ${manager.officeNumber}</li> 
                             </ul>
-                        </div>`
+                        </div>\n`
                 
                 fs.appendFile('index.html', generateManagerCard(manager),'utf8', (err) => {
                     err ? console.error(err) : console.log("Manager card appended!")
@@ -173,13 +171,14 @@ inquirer
                                             const generateEmployeeCard = (employee) =>
                                                 `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                                 <div class="card-body">
+                                                <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
                                                 <h4 class="card-title">${employee.name} <i class="fa-solid fa-user-tie"></i></h4>
                                                 </div>
                                                     <ul class="list-group list-group-flush">
                                                     <li class="list-group-item bg-secondary">ID: ${employee.id}</li>
                                                     <li class="list-group-item bg-secondary">Email: <a href="mailto:${employee.email}">${employee.email}</a></li>
                                                     </ul>
-                                                </div>`
+                                                </div>\n`
 
                                                 fs.appendFile('index.html', generateEmployeeCard(employee),'utf8', (err) => {
                                                     err ? console.error(err) : console.log("Employee card appended!")
@@ -221,6 +220,7 @@ inquirer
                                                 const generateEngineerCard = (engineer) => 
                                                 `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                                 <div class="card-body">
+                                                <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
                                                 <h4 class="card-title">${engineer.name} <i class="fa-solid fa-user-gear"></h4>
                                                 </div>
                                                     <ul class="list-group list-group-flush">
@@ -228,7 +228,7 @@ inquirer
                                                     <li class="list-group-item bg-secondary">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></li>
                                                     <li class="list-group-item bg-secondary">Github: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li> 
                                                     </ul>
-                                                </div>`
+                                                </div>\n`
                                         
                                             fs.appendFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
                                                 err ? console.error(err) : console.log("Engineer card appended!")
@@ -270,6 +270,7 @@ inquirer
                                             const generateInternCard = (intern) =>
                                             `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                             <div class="card-body">
+                                            <button class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
                                             <h4 class="card-title">${intern.name} <i class="fa-solid fa-user-graduate"></i></h4>
                                             </div>
                                                 <ul class="list-group list-group-flush">
@@ -277,7 +278,7 @@ inquirer
                                                 <li class="list-group-item bg-secondary">Email: <a href="mailto:${intern.email}">${intern.email}</a></li>
                                                 <li class="list-group-item bg-secondary">School: ${intern.school}</li> 
                                                 </ul>
-                                            </div>`
+                                            </div>\n`
 
                                             fs.appendFile('index.html', generateInternCard(intern),'utf8', (err) => {
                                                 err ? console.error(err) : console.log("Intern card appended!")
