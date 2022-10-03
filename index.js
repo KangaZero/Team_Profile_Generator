@@ -111,7 +111,7 @@ inquirer
                         const generateManagerCard = (manager) =>
                         `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                         <div class="card-body">
-                        <button id="manager-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                        <button id="manager-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0"><i class="fa-solid fa-copy"></i></button>
                         <h4 id="manager-name" class="card-title">${manager.name} <i class="fa-solid fa-star"></i></h4>
                         </div>
                             <ul class="list-group list-group-flush">
@@ -180,7 +180,7 @@ inquirer
                                             const generateEmployeeCard = (employee) =>
                                                 `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                                 <div class="card-body">
-                                                <button id="employee-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                                                <button id="employee-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0"><i class="fa-solid fa-copy"></i></button>
                                                 <h4 id="employee-name" class="card-title">${employee.name} <i class="fa-solid fa-user-tie"></i></h4>
                                                 </div>
                                                     <ul class="list-group list-group-flush">
@@ -238,7 +238,7 @@ inquirer
                                                 const generateEngineerCard = (engineer) => 
                                                 `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                                 <div class="card-body">
-                                                <button id="engineer-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                                                <button id="engineer-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0"><i class="fa-solid fa-copy"></i></button>
                                                 <h4 id="engineer-name" class="card-title">${engineer.name} <i class="fa-solid fa-user-gear"></i></h4>
                                                 </div>
                                                     <ul class="list-group list-group-flush">
@@ -297,7 +297,7 @@ inquirer
                                             const generateInternCard = (intern) =>
                                             `<div class="d-flex flex-column col-12 col-md-6 card text-center m-3 custom-card-dark text-light" style="width: 25rem;">
                                             <div class="card-body">
-                                            <button id="intern-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0" onclick="copyText()"><i class="fa-solid fa-copy"></i></button>
+                                            <button id="intern-btn" class="btn btn-secondary w-10 position-absolute top-0 end-0"><i class="fa-solid fa-copy"></i></button>
                                             <h4 id="intern-name" class="card-title">${intern.name} <i class="fa-solid fa-user-graduate"></i></h4>
                                             </div>
                                                 <ul class="list-group list-group-flush">
