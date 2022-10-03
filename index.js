@@ -71,7 +71,7 @@ inquirer
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>${answers1.teamName}</title>
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
             <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
             <link href="./dist/style.css" type="text/css" rel="stylesheet"/>
@@ -79,6 +79,16 @@ inquirer
         <body class="custom-background">
             <div class="container-fluid text-center text-light bg-dark p-4">
                 <h1 class="mx-auto">${answers1.teamName}</h1>
+                <div aria-live="polite" aria-atomic="true" style="position: sticky;">                                                 
+                    <div style="position: sticky; top: 1%; left: 90%; width: 15%">
+                      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header bg-secondary">
+                            <strong class="me-auto text-light"><p class="text-center"></p>Copied</strong>
+                            <button type="button" class="btn-primary btn-close" data-bs-dismiss="toast"></button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </div>
                 <hr class="border border-white">
             <div id="main" class="d-flex flex-row flex-wrap justify-content-around col-12">`
@@ -370,7 +380,7 @@ inquirer
     const end = () => {
         const generateBottomSection = () =>
         `</div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <script src="./index.js"></script>

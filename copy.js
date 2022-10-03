@@ -1,3 +1,4 @@
+
 const copyManagerText = () =>{
     const managerBtnEl = document.querySelector('#manager-btn');
     //text content
@@ -8,7 +9,12 @@ const copyManagerText = () =>{
 
     managerBtnEl.addEventListener("click", () =>{
         const managerText = `Name: ${managerName.innerText}\nRole: Manager\nId: ${managerId.innerText}\nEmail: ${managerEmail.innerText}\nOffice number: ${managerOfficeNumber.innerText}`;
-        navigator.clipboard.writeText(managerText);
+        navigator.clipboard.writeText(managerText)
+        .then(()=>{
+            let toast = document.querySelector(".toast");
+            toast = new bootstrap.Toast(toast);
+            toast.show()
+        });
     });
 };  copyManagerText();
 
@@ -21,7 +27,12 @@ const copyEmployeeText = () =>{
     
     employeeBtnEl.addEventListener("click", () => {
         const employeeText = `Name: ${employeeName.innerText}\nRole: Employee\nId: ${employeeId.innerText}\nEmail: ${employeeEmail.innerText}`;
-        navigator.clipboard.writeText(employeeText);
+        navigator.clipboard.writeText(employeeText)
+        .then(()=>{
+            let toast = document.querySelector(".toast");
+            toast = new bootstrap.Toast(toast);
+            toast.show()
+        });
     });
 };  copyEmployeeText();
 
@@ -36,7 +47,12 @@ const copyEngineerText = () =>{
 
     engineerBtnEl.addEventListener("click", () =>{
         const engineerText = `Name: ${engineerName.innerText}\nRole: Engineer\nId: ${engineerId.innerText}\nEmail: ${engineerEmail.innerText}\nGithub: ${engineerGithub.innerText}`;
-        navigator.clipboard.writeText(engineerText);
+        navigator.clipboard.writeText(engineerText)
+        .then(()=>{
+            let toast = document.querySelector(".toast");
+            toast = new bootstrap.Toast(toast);
+            toast.show()
+        });
     });
 };  copyEngineerText();
 
@@ -51,9 +67,17 @@ const copyInternText = () =>{
 
     internBtnEl.addEventListener("click", () =>{
         const internText = `Name: ${internName.innerText}\nRole: Intern\nId: ${internId.innerText}\nEmail: ${internEmail.innerText}\nSchool: ${internSchool.innerText}`;
-        navigator.clipboard.writeText(internText);
+        navigator.clipboard.writeText(internText)
+        .then(()=>{
+            let toast = document.querySelector(".toast");
+            toast = new bootstrap.Toast(toast);
+            toast.show()
+        });
     });
 };  copyInternText();
 
 //Resource used
 //https://www.youtube.com/watch?v=i1WiTV6rkZ4
+
+
+    
