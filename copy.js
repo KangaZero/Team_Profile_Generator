@@ -8,7 +8,7 @@ const copyManagerText = () =>{
     const managerOfficeNumber = document.querySelector('#manager-office-number');
 
     managerBtnEl.addEventListener("click", () =>{
-        const managerText = `Name: ${managerName.innerText}\nRole: Manager\nId: ${managerId.innerText}\nEmail: ${managerEmail.innerText}\nOffice number: ${managerOfficeNumber.innerText}`;
+        const managerText = `Name: ${managerName.innerText}\nRole: Manager\n${managerId.innerText}\n${managerEmail.innerText}\n${managerOfficeNumber.innerText}`;
         navigator.clipboard.writeText(managerText)
         .then(()=>{
             let toast = document.querySelector(".toast");
@@ -26,7 +26,7 @@ const copyEmployeeText = () =>{
     const employeeEmail = document.querySelector('#employee-email');
     
     employeeBtnEl.addEventListener("click", () => {
-        const employeeText = `Name: ${employeeName.innerText}\nRole: Employee\nId: ${employeeId.innerText}\nEmail: ${employeeEmail.innerText}`;
+        const employeeText = `Name: ${employeeName.innerText}\nRole: Employee\n${employeeId.innerText}\n${employeeEmail.innerText}`;
         navigator.clipboard.writeText(employeeText)
         .then(()=>{
             let toast = document.querySelector(".toast");
@@ -46,7 +46,7 @@ const copyEngineerText = () =>{
     const engineerGithub = document.querySelector('#engineer-github');
 
     engineerBtnEl.addEventListener("click", () =>{
-        const engineerText = `Name: ${engineerName.innerText}\nRole: Engineer\nId: ${engineerId.innerText}\nEmail: ${engineerEmail.innerText}\nGithub: ${engineerGithub.innerText}`;
+        const engineerText = `Name: ${engineerName.innerText}\nRole: Engineer\n${engineerId.innerText}\n${engineerEmail.innerText}\n${engineerGithub.innerText}`;
         navigator.clipboard.writeText(engineerText)
         .then(()=>{
             let toast = document.querySelector(".toast");
@@ -66,7 +66,7 @@ const copyInternText = () =>{
     const internSchool = document.querySelector('#intern-school');
 
     internBtnEl.addEventListener("click", () =>{
-        const internText = `Name: ${internName.innerText}\nRole: Intern\nId: ${internId.innerText}\nEmail: ${internEmail.innerText}\nSchool: ${internSchool.innerText}`;
+        const internText = `Name: ${internName.innerText}\nRole: Intern\n${internId.innerText}\n${internEmail.innerText}\n${internSchool.innerText}`;
         navigator.clipboard.writeText(internText)
         .then(()=>{
             let toast = document.querySelector(".toast");
