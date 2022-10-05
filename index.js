@@ -2,51 +2,11 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-// const { library } = require('@fortawesome/fontawesome-svg-core');
-// const { fas } = require('@fortawesome/free-solid-svg-icons');
-// const { far } = require('@fortawesome/free-regular-svg-icons');
-// const { fab } = require('@fortawesome/free-brands-svg-icons');
-
-
-// library.add(fas, far, fab);
-
-// //icons
-// //https://fontawesome.com/docs/apis/javascript/icon-library#using-the-library
-// const { findIconDefinition, icon } = require('@fortawesome/fontawesome-svg-core');
-// const star = findIconDefinition({ prefix: 'fas', iconName: 'star' });
-// const userTie = findIconDefinition({ prefix: 'fas', iconName: 'user-tie' });
-// const userGraduate = findIconDefinition({ prefix: 'fas', iconName: 'user-graduate' });
-// const userGear = findIconDefinition({ prefix: 'fas', iconName: 'user-gear' });
-
-// const starIcon = icon(star);
-// const userTieIcon = icon(userTie);
-// const userGraduateIcon = icon(userGraduate);
-// const userGearIcon = icon(userGear);
-
-
-
 //classes
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
-
-//merge
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-
-// const test = { employeeName: 'mm', employeeId: '7', employeeEmail: 'lol' }
-// const test2 =   {
-//     managerId: 'l',
-//     managerEmail: 'l',
-//     managerOfficeNumber: 'l',
-//     addEmployee: true
-//   }
-       //TODO merge method HERE!
-// const test3 = {...test, ...test2}
-//or
-//const merge = (...objects) => objects.reduce((acc, cur) => ({ ...acc, ...cur }));
-//const merged = merge(test, test2)
-
 
 
 inquirer
@@ -135,14 +95,6 @@ inquirer
                     err ? console.error(err) : console.log("Manager card appended!")
                 });
 
-                // const copyManagerText = () =>{
-                //     const managerBtnEl = document.querySelector('#manager-btn');
-                //     managerBtnEl.addEventListener("click", () =>{
-                //         const managerText = `Name: ${manager.name}\nRole: ${manager.getRole()}\nId: ${manager.id}\nEmail: ${manager.email}\n Office number: ${manager.officeNumber}`
-                //         managerText.select();
-                //     });
-                // };  copyManagerText();
-
                     inquirer
                     .prompt([
                         {
@@ -152,7 +104,7 @@ inquirer
                         },
                     ]).then((confirm) => {
                         const confirmPrompt = () => {
-                        if(confirm.addEmployee || repick.repick){
+                        if(confirm.addEmployee){
                             inquirer
                                 .prompt([
                                     {
@@ -203,14 +155,6 @@ inquirer
                                                     err ? console.error(err) : console.log("Employee card appended!")
                                                 });
 
-                                                // const copyEmployeeText = () =>{
-                                                //     const employeeBtnEl = document.querySelector('#employee-btn');
-                                                //     employeeBtnEl.addEventListener("click", () =>{
-                                                //         const employeeText = `Name: ${employee.name}\nRole: ${employee.getRole()}\nId: ${employee.id}\nEmail: ${employee.email}`
-                                                //         employeeText.select();
-                                                //     });
-                                                // };  copyEmployeeText();
-
                                                 repickPrompt();
                                         });
             
@@ -241,7 +185,6 @@ inquirer
                                                 },
                                              
                                         ]).then((engineerAnswers) => {
-                                            //might need to deconstruct later as well //TODO cut & paste to generateTeamPage
                                             const {engineerName, engineerId, engineerEmail, engineerGithub} = engineerAnswers;
                                             const engineer = new Engineer(engineerName, engineerId, engineerEmail, engineerGithub);
                     
@@ -261,14 +204,6 @@ inquirer
                                             fs.appendFile('index.html', generateEngineerCard(engineer),'utf8', (err) => {
                                                 err ? console.error(err) : console.log("Engineer card appended!")
                                             });
-
-                                            // const copyEngineerText = () =>{
-                                            //     const engineerBtnEl = document.querySelector('#enigneer-btn');
-                                            //     engineerBtnEl.addEventListener("click", () =>{
-                                            //         const engineerText = `Name: ${engineer.name}\nRole: ${engineer.getRole()}\nId: ${engineer.id}\nEmail: ${engineer.email}\nGithub: ${engineer.github}`
-                                            //         engineerText.select();
-                                            //     });
-                                            // };  copyEngineerText();
 
                                             repickPrompt();
                                       
@@ -321,14 +256,6 @@ inquirer
                                                 err ? console.error(err) : console.log("Intern card appended!")
                                             });
 
-                                            // const copyInternText = () =>{
-                                            //     const internBtnEl = document.querySelector('#intern-btn');
-                                            //     internBtnEl.addEventListener("click", () =>{
-                                            //         const internText = `Name: ${intern.name}\nRole: ${intern.getRole()}\nId: ${intern.id}\nEmail: ${intern.email}\nSchool: ${intern.school}`
-                                            //         internText.select();
-                                            //     });
-                                            // };  copyInternText();
-
                                             repickPrompt();
 
                                         });
@@ -352,28 +279,15 @@ inquirer
                     .prompt([
                         {
                             type:'confirm',
-                            name:'repick',
+                            name:'addEmployee',
                             message: "Would you to add another employee?"
                         }
-                    ]).then((repick => repick.repick ? confirmPrompt() : end())) 
+                    ]).then((confirm => confirm.addEmployee ? confirmPrompt() : end())) 
                 };
              confirmPrompt();
-             }); //132
-       // }; //124
-        
-                // const repickPrompt = () => {
-                //     inquirer
-                //         .prompt([
-                //             {
-                //                 type:'confirm',
-                //                 name:'repick',
-                //                 message: "Would you to add another employee?"
-                //             }
-                //         ]).then((repick => repick.repick ? confirmPrompt() : end())) 
-                //     };
-                
-                }); //104
-            });   //64  
+             });  
+                }); 
+            });   
     
 
 
@@ -393,7 +307,7 @@ inquirer
     </body>
     </html>`
 
-        fs.appendFile('index.html', generateBottomSection(),'utf8', (err) => {
+        fs.appendFile('./index.html', generateBottomSection(),'utf8', (err) => {
                         err ? console.error(err) : console.log("Team Page completed!")
                     });
                 };
