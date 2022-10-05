@@ -1,12 +1,14 @@
+# <Team-Profile-Generator>
+
 ## Team Profile Generator
-<a name="readme-top"></a>
+<a id="readme-top"></a>
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#description">Description</a></li>
-    <li><a href="#installation">Installation></a></li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -18,11 +20,16 @@
 ## Description
 <details> <summary>Desktop View</summary>
 
-![Desktop-view](dist/assets/images/Desktop_view.png)
+![Desktop-view](dist/assets/Desktop-view.png)
 
-<summary>Mobile View</summart>
+</details>
 
-![Mobile-view](dist/assets/images/Mobile_view.png)
+<details><summary>Mobile View</summary>
+
+<p align="center">
+<img src="./dist/assets/Mobile-view.png"/>
+</p>
+
 </details>
 
 **What?**
@@ -110,12 +117,12 @@ Project Link: [Team-Profile-Generator](https://github.com/KangaZero/Team_Profile
 Here are some of the resources used as reference to build this personal portfolio
 
 * [Choose an Open Source License](https://choosealicense.com)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [CSS-gradient](https://cssgradient.io/)
-* [Color-theory](https://www.invisionapp.com/inside-design/understanding-color-theory-the-color-wheel-and-finding-complementary-colors/)
+* [Font Awesome](https://fontawesome.com/v5/docs/web/use-with/wordpress/install-manually)
+* [Bootstrap Toast](https://getbootstrap.com/docs/4.3/components/toasts/#:~:text=Push%20notifications%20to%20your%20visitors,easy%20to%20align%20and%20position.)
+* [Jest Mock Function](https://jestjs.io/docs/mock-functions)
 * [Email-tag](https://www.w3schools.com/tags/tag_address.asp)
-* [Call-tag](https://www.elegantthemes.com/blog/wordpress/call-link-html-phone-number#:~:text=Adding%20an%20HTML%20Phone%20Number%20Call%20Link%20to%20your%20Website&text=Href%3Dtel%3A%20creates%20the%20call,the%20number%20it%20will%20call.)
-* [Glowing-text](https://www.w3schools.com/howto/howto_css_glowing_text.asp)
+* [JQuery Draggable Function](https://jqueryui.com/draggable/)
+* [Inquirer doc](http://adilapapaya.com/docs/inquirer/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
