@@ -124,6 +124,8 @@ Here are some of the resources used as reference to build this personal portfoli
 * [JQuery Draggable Function](https://jqueryui.com/draggable/)
 * [Inquirer doc](http://adilapapaya.com/docs/inquirer/)
 
+And small special thanks to Doug for helping me implement a mock function (Engineer.test.js)!
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 

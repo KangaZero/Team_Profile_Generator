@@ -1,7 +1,4 @@
 const Engineer = require("../lib/Engineer");
-//const fetch = require("jest-mock-fetch");
-
-//jest.mock('fetch')
 
 describe("Engineer class", () => {
 
@@ -9,11 +6,12 @@ describe("Engineer class", () => {
 
     describe("getGithub method", () => {
         it("returns user's github username", () => {
-            expect(engineer.getGithub()).toBe("KangaZero");
 
+            const myMockFn = jest.fn(() => "KangaZero")
+
+            expect(myMockFn()).toBe("KangaZero")
         });
     
         });
     });
 
- 
